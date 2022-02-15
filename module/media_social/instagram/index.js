@@ -39,15 +39,13 @@ const userFetch = user => {
     }
 }
 
-exports.getStory = async url => {
+exports.getStory = async (url, uid) => {
     return new Promise(async (resolve, reject) => {
-        let uid = req.query.uid;
         if (url.indexOf("stories") === -1 && !uid) return resolve({ message: "Not valid url story", status: false })
-        const valid = urlStory.indexOf('www.instagram.com')
+        const valid = url.indexOf('www.instagram.com')
         const re =  valid ? 'https://www.instagram.com' : 'https://instgram.com'
-        const sp = urlStory.split(re)[1].split('/')
-        const stid = sp[3]
-        let stid = stid;
+        const sp = url.split(re)[1].split('/')
+        let stid = sp[3]
         axios.get(`https://i.instagram.com/api/v1/feed/user/${uid}/story/`, {
             headers: getHeaders(defaultHeaders)
         })
@@ -65,7 +63,7 @@ exports.getStory = async url => {
                 }
             });
         }).catch(err => {
-            resolve(err)
+            resolve({ message: "Not valid story" })
         })
     })
 }
