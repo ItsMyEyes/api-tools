@@ -39,25 +39,15 @@ const userFetch = user => {
     }
 }
 
-const getId = urlStory => {
-    const valid = urlStory.indexOf('www.instagram.com')
-    const re =  valid ? 'https://www.instagram.com' : 'https://instgram.com'
-    const sp = urlStory.split(re)[1].split('/')
-    const u = sp[2]
-    const stid = sp[3]
-    return axios.get(`https://www.instagram.com/${u}/?__a=1`).then(data => {
-        return {
-            user_id: data.data.graphql.user.id,
-            status_id: stid
-        }
-    })
-}
-
 exports.getStory = async url => {
     return new Promise(async (resolve, reject) => {
-        if (url.indexOf("stories") === -1) return resolve({ message: "Not valid url story", status: false })
-        let stid = (await getId(url)).status_id;
-        let uid = (await getId(url)).user_id
+        let uid = req.query.uid;
+        if (url.indexOf("stories") === -1 && !uid) return resolve({ message: "Not valid url story", status: false })
+        const valid = urlStory.indexOf('www.instagram.com')
+        const re =  valid ? 'https://www.instagram.com' : 'https://instgram.com'
+        const sp = urlStory.split(re)[1].split('/')
+        const stid = sp[3]
+        let stid = stid;
         axios.get(`https://i.instagram.com/api/v1/feed/user/${uid}/story/`, {
             headers: getHeaders(defaultHeaders)
         })
