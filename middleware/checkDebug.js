@@ -3,7 +3,9 @@ module.exports = async (req, res, next) => {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
     const allowedIpDebug = [
         "::1",
-        "127.0.0.1"
+        "127.0.0.1",
+        "110.138.90.157",
+        "104.21.39.91"
     ]
     if (allowedIpDebug.indexOf(ip) !== -1 && ch) {
         return next() 
