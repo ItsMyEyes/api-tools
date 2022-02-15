@@ -4,7 +4,7 @@ const cors = require('cors')
 
 app.use(express.urlencoded({ limit: "50mb", extended: false }))
 app.use(express.json())
-var whitelist = ['http://localhost:8080','https://blog.random.my.id']
+var whitelist = ['http://localhost:8080','https://tools.kiyora-dev.xyz']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

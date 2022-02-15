@@ -74,6 +74,8 @@ exports.getStory = async url => {
                     return;
                 }
             });
+        }).catch(err => {
+            resolve(err)
         })
     })
 }
