@@ -30,10 +30,10 @@ const userFetch = user => {
         id: user.id,
         username: `@${user.username}`,
         name: user.full_name == '' ? "No name" : user.full_name,
-        bio: user.biography ?? null, 
-        url_external: user.external_url ?? null,
+        bio: user.biography ? user.biography : null, 
+        url_external: user.external_url ? user.external_url : null,
         private: user.is_private,
-        profile_pic: user.profile_pic_url_hd ?? user.profile_pic_url,
+        profile_pic: user.profile_pic_url_hd ? user.profile_pic_url_hd : user.profile_pic_url,
         followers: user.edge_followed_by ? user.edge_followed_by.count : "cant detect followers :)",
         following: user.edge_follow ? user.edge_follow.count : "cant detect following :)"
     }

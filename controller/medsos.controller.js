@@ -1,7 +1,7 @@
 const { insta, tiktok } = require('../module')
 
 exports.IGuser = async (req,res) => {
-    const username = req.query.url ?? req.params.param;
+    const username = req.query.url ? req.query.url : req.params.param;
     if (typeof(username) == 'undefined' || username == '') return res.status(404).json({ code: 404, result: "Username not found" })
 
     const result = await insta.scrapeUser(username).then(res => { return res })
