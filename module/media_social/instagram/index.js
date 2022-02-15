@@ -93,7 +93,9 @@ exports.scrapeUser = username => {
     }
     
     return new Promise(function (resolve, reject) {
-        axios.get(`https://www.instagram.com/${code}/?__a=1`).then(data => {
+        axios.get(`https://www.instagram.com/${code}/?__a=1`, {
+            headers: getHeaders(defaultHeaders)
+        }).then(data => {
             const d = data.data
             const user = d.graphql.user
             resolve({
