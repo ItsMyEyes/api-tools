@@ -1,10 +1,9 @@
 const axios = require('axios')
-const countryCode = require('country-data')
+// const countryCode = require('country-data')
 
 module.exports = (text, opts = {}) => {
     const source = opts.source ? opts.source : 'en';
     const target = opts.target ? opts.target : 'id'; 
-    const code = countryCode.countries.all.filter(res => res.alpha2 == target.toUpperCase())
     const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${source}&tl=${target}&dt=t&q=${encodeURI(text)}`
     return new Promise(function (resolve, reject) {
         axios.get(url).then(res => {
@@ -18,7 +17,7 @@ module.exports = (text, opts = {}) => {
        }).catch(() => {
             resolve({
                 error: true,
-                translate: `Cant translate to ${code[0].name}`
+                translate: `Cant translate to ${target}`
             })
        })
     })
