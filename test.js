@@ -1,35 +1,15 @@
 const axios = require('axios').default
-const defaultHeaders = {
-    'sec-ch-ua': '"Google Chrome";v="87", " Not;A Brand";v="99", "Chromium";v="87"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-fetch-dest': 'empty',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'same-site',
-    'x-ig-app-id': '936619743392459',
-    'x-ig-www-claim': 'hmac.AR0A6WzcCoXWstKAUuy1gRbCQFUs8FoZCp3ap2UMk_KQNBSH',
-}
-  
-const getHeaders = (headers) => {
-    return Object.assign(headers, {
-        cookie: `sessionid=52085861546:XXOhMZwjJI3lVP:27; ds_user_id=52085861546`
-    })
-}
-axios.get(`https://i.instagram.com/api/v1/feed/user/360442074/story/`, {
-    headers: getHeaders(defaultHeaders)
-})
-.then(async data => {
-    const reel = data.data.reel;
-    const item = reel.items
-    let sr = Array();
-    item.forEach(el => {
-        sr.push({ url: typeof(el.video_versions) == 'undefined' ? el.image_versions2.candidates[0] : el.video_versions[0]})
-    });
-    console.log({
-        status: true,
-        who: reel.items[0].user,
-        source: sr
-    })
+
+const url = "https://www.tiktok.com/@spaccer/video/7058349604969991429?is_copy_url=1&is_from_webapp=v1&q=fakegun%20valorant&t=1644655470911"
+axios.post(`https://api.tikmate.app/api/lookup?url=${url}`).then(data => {
+    const u = data.data
+    const result = {
+        success: true,
+        status: 200,
+        video_download_hd: `https://tikmate.app/download/${u.token}/${u.id}.mp4?hd=1`,
+        data: u,
+    }
+    console.log(result)
 }).catch(err => {
-    console.log(err)
-    console.log({ message: "Instagram / Story cant to get, like iam get him", status: false })
+    console.log(err.response.data)
 })
