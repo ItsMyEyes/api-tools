@@ -14,12 +14,7 @@ var corsOptions = {
     }
   }
 }
-
-if (process.env.NODE_ENV === "production") {
-  app.use(cors(corsOptions))
-} else {
-  app.use(cors())
-}
+app.use(cors())
 
 app.use('/medsos',require('./routes/medsos.route'))
 app.use('/tools', require('./routes/tools.route'))
