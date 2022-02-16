@@ -48,11 +48,11 @@ module.exports = url => {
                 resolve(result);
             })
             .catch(e => {
-                reject({ status: false, message: 'error fetch data', e: e.message })
+                resolve({ status: false, message: 'error fetch data', e: e.message })
             })
         })
         .catch(e => {
-            reject({ status: false, message: 'error fetch data', e: e.message })
+            resolve({ status: false, message: 'error fetch data', e: e.message })
         })
     })
 }
