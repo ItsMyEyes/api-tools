@@ -29,8 +29,8 @@ module.exports = url => {
                 const result = {
                     success: true,
                     status: 200,
-                    video_download_hd: $('#results-list > div:nth-child(2) > div.download > a')?.attr('href'),
-                    wm: $('#results-list > div:nth-child(3) > div.download > a')?.attr('href'),
+                    video_download_hd: $('#results-list > div:nth-child(2) > div.download > a').attr('href'),
+                    wm: $('#results-list > div:nth-child(3) > div.download > a').attr('href'),
                     audio: $('#results-list > div:nth-child(4) > div.download > a').attr('href')
                 }
                 resolve(result);
