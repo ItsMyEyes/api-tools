@@ -35,7 +35,8 @@ const userFetch = user => {
         private: user.is_private,
         profile_pic: user.profile_pic_url_hd ? user.profile_pic_url_hd : user.profile_pic_url,
         followers: user.edge_followed_by ? user.edge_followed_by.count : "cant detect followers :)",
-        following: user.edge_follow ? user.edge_follow.count : "cant detect following :)"
+        following: user.edge_follow ? user.edge_follow.count : "cant detect following :)",
+        post: user.edge_owner_to_timeline_media ? user.edge_owner_to_timeline_media.count : "cant detect post :)"
     }
 }
 
