@@ -1,6 +1,7 @@
 const { default: Axios } = require('axios')
 const qs = require('qs')
 const cheerio = require('cheerio')
+const moment = require('moment')
 const TikTokScraper = require('tiktok-scraper');
 
 module.exports = url => {
@@ -39,7 +40,7 @@ module.exports = url => {
                         author_id: meta.authorMeta.nickName,
                         author_name: meta.authorMeta.nickName,
                         like_count: meta.diggCount,
-                        create_time: moment(content.createTime).calendar(),
+                        create_time: moment(meta.createTime).calendar(),
                         share_count: meta.shareCount,
                         text: meta.text
                     }
