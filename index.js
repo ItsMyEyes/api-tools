@@ -14,7 +14,7 @@ var corsOptions = {
     }
   }
 }
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use('/medsos',require('./routes/medsos.route'))
 app.use('/tools', require('./routes/tools.route'))
