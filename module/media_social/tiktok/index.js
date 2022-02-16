@@ -1,6 +1,7 @@
 const { default: Axios } = require('axios')
 const qs = require('qs')
 const cheerio = require('cheerio')
+const TikTokScraper = require('tiktok-scraper');
 
 module.exports = url => {
     return new Promise(function (resolve, reject) {
@@ -24,14 +25,24 @@ module.exports = url => {
                     cookie: cookie,
                 },
                 data: qs.stringify(dataPost)
-            }).then(({ data }) => {
+            }).then(async ({ data }) => {
                 const $ = cheerio.load(data)
+                const videoMeta = await TikTokScraper.getVideoMeta(url);
+                const meta = videoMeta.collector[0]
                 const result = {
                     success: true,
                     status: 200,
                     video_download_hd: $('#results-list > div:nth-child(2) > div.download > a').attr('href'),
                     wm: $('#results-list > div:nth-child(3) > div.download > a').attr('href'),
-                    audio: $('#results-list > div:nth-child(4) > div.download > a').attr('href')
+                    audio: $('#results-list > div:nth-child(4) > div.download > a').attr('href'),
+                    data: {
+                        author_id: meta.authorMeta.nickName,
+                        author_name: meta.authorMeta.nickName,
+                        like_count: meta.diggCount,
+                        create_time: moment(content.createTime).calendar(),
+                        share_count: meta.shareCount,
+                        text: meta.text
+                    }
                 }
                 resolve(result);
             })
