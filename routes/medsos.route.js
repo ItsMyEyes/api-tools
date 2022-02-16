@@ -7,6 +7,7 @@ router.get('/ig', middleware, medsosCr.IGuser)
 router.get('/ig/:param', middleware, medsosCr.IGuser)
 router.get('/ig/media/get', middleware, medsosCr.IGmedia)
 router.get('/ig/story/get', middleware, medsosCr.IGstory)
+router.get('/ig/story/get/user', middleware, medsosCr.IGstoryUser)
 
 router.get('/tiktok', middleware, medsosCr.tiktok)
 

@@ -34,6 +34,17 @@ exports.IGstory = async (req,res) => {
     });
 }
 
+exports.IGstoryUser = async (req,res) => {
+    const url = req.query.url;
+    if (typeof(url) == 'undefined' || url == '' ) return res.status(404).json({ code: 404, message: "Media not found" })
+
+    const result = await insta.getStoryUser(url).then(res => { return res })
+    return res.status(200).json({
+        code: 200,
+        ...result
+    });
+}
+
 exports.tiktok = async (req,res) => {
     const url = req.query.url;
     if (typeof(url) == 'undefined' || url == '') return res.status(404).json({ code: 404, result: "Media not found" })

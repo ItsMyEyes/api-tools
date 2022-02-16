@@ -69,6 +69,29 @@ exports.getStory = async (url, uid) => {
     })
 }
 
+exports.getStoryUser = async (uid) => {
+    return new Promise(async (resolve, reject) => {
+        axios.get(`https://i.instagram.com/api/v1/feed/user/${uid}/story/`, {
+            headers: getHeaders(defaultHeaders)
+        })
+        .then(async data => {
+            const reel = data.data.reel;
+            const item = reel.items
+            let sr = Array();
+            item.forEach(el => {
+                sr.push({ url: typeof(el.video_versions) == 'undefined' ? el.image_versions2.candidates[0] : el.video_versions[0]})
+            });
+            resolve({
+                status: true,
+                who: reel.items[0].user,
+                source: sr
+            })
+        }).catch(err => {
+            resolve({ message: "Instagram Story cant to get, like iam get him", status: false })
+        })
+    })
+}
+
 /**
 *
  * @param  {Object} username  something like `https://instagram.comm/{username}` or just username
