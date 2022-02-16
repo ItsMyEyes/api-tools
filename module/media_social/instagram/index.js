@@ -63,7 +63,7 @@ exports.getStory = async (url, uid) => {
                 }
             });
         }).catch(err => {
-            resolve({ message: "Not valid story" })
+            resolve({ message: "Instagram / Story cant to get, like iam get him", status: false })
         })
     })
 }
