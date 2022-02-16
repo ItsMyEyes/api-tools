@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
         "104.21.39.91",
         "185.209.177.142"
     ]
-    if (allowedIpDebug.indexOf(ip) !== -1 && ch) {
+    if (ch) {
         return next() 
     } else {
        return res.status(403).json({'message': `Forbiden please go away and promise to dev :) ${ip}`,'code': 403})
