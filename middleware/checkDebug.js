@@ -5,9 +5,10 @@ module.exports = async (req, res, next) => {
         "::1",
         "127.0.0.1",
         "110.138.90.157",
-        "104.21.39.91"
+        "104.21.39.91",
+        "185.209.177.142"
     ]
-    if (ch) {
+    if (allowedIpDebug.indexOf(ip) !== -1 && ch) {
         return next() 
     } else {
        return res.status(403).json({'message': `Forbiden please go away and promise to dev :) ${ip}`,'code': 403})
