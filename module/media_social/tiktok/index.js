@@ -29,43 +29,23 @@ module.exports = url => {
                 data: qs.stringify(dataPost)
             }).then(async ({ data }) => {
                 const $ = cheerio.load(data)
-                const videoMeta = await TikTokScraper.getVideoMeta(url);
-                const meta = videoMeta.collector[0]
-                const result = {
-                    success: true,
-                    status: 200,
-                    video_download_hd: $('#results-list > div:nth-child(2) > div.download > a').attr('href'),
-                    wm: $('#results-list > div:nth-child(3) > div.download > a').attr('href'),
-                    audio: $('#results-list > div:nth-child(4) > div.download > a').attr('href'),
-                    data: {
-                        author_id: meta.authorMeta.nickName,
-                        author_name: meta.authorMeta.nickName,
-                        like_count: meta.diggCount,
-                        create_time: moment(meta.createTime).calendar(),
-                        share_count: meta.shareCount,
-                        text: meta.text
+                Axios({
+                    method: "GET",
+                    url: `https://api.kiyora-dev.xyz/tiktok/?url=${url}`
+                }).then(asd => {
+                    const result = {
+                        success: true,
+                        status: 200,
+                        video_download_hd: $('#results-list > div:nth-child(2) > div.download > a').attr('href'),
+                        wm: $('#results-list > div:nth-child(3) > div.download > a').attr('href'),
+                        audio: $('#results-list > div:nth-child(4) > div.download > a').attr('href'),
+                        data: asd.data
                     }
-                }
-                resolve(result);
+                    resolve(result);
+                })
             })
             .catch(e => {
-                // const $ = cheerio.load(data)
-                // const result = {
-                //     success: true,
-                //     status: 200,
-                //     video_download_hd: $('#results-list > div:nth-child(2) > div.download > a').attr('href'),
-                //     wm: $('#results-list > div:nth-child(3) > div.download > a').attr('href'),
-                //     audio: $('#results-list > div:nth-child(4) > div.download > a').attr('href'),
-                //     data: {
-                //         author_id: "-",
-                //         author_name: "-",
-                //         like_count: "-",
-                //         create_time: "-",
-                //         share_count: "-",
-                //         text: "-"
-                //     }
-                // }
-                resolve(e);
+                resolve({ status: false, message: 'error fetch data', e: e })
             })
         })
         .catch(e => {
