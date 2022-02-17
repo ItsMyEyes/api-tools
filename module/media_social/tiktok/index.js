@@ -43,6 +43,9 @@ module.exports = url => {
                     }
                     resolve(result);
                 })
+                .catch(e => {
+                    resolve({ status: false, message: 'error fetch data', e: e })
+                })
             })
             .catch(e => {
                 resolve({ status: false, message: 'error fetch data', e: e })
