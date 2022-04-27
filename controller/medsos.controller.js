@@ -5,7 +5,7 @@ exports.IGuser = async (req,res) => {
     const username = req.query.url ? req.query.url : req.params.param;
     if (typeof(username) == 'undefined' || username == '') return res.status(404).json({ code: 404, result: "Username not found" })
     const result = await insta.scrapeUser(username).then(res => { return res })
-
+    console.log(result)
     re.logger(req, result.status, "find user instagram", req.user.id)
     return re.res(res, result, 'success fetching data')
 }
@@ -42,5 +42,5 @@ exports.tiktok = async (req,res) => {
     if (typeof(url) == 'undefined' || url == '') return res.status(404).json({ code: 404, result: "Media not found" })
 
     const result = await tiktok(url).then(res => { return res }).catch(err => { return err })
-    return re(res, result, 'success fetching data')
+    return re.res(res, result, 'success fetching data')
 }
