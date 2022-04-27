@@ -96,6 +96,6 @@ exports.registUser = async (req,res) => {
         'username': username,
     })
 
-    result.logger(req, true, 'create new user')
+    // result.logger(req, true, 'create new user')
     return result.message(res,'You are done make new users')
 }
