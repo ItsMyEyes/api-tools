@@ -80,12 +80,10 @@ exports.registUser = async (req,res) => {
     })
 
     if (validationEmail) {
-        result.logger(req, false, 'create new user')
         return result.message(res, 'email has been used, please use another email', 400) 
     }
 
     if (validationUsername) {
-        result.logger(req, false, 'create new user')
         return result.message(res,'username has been used, please use another username', 400)   
     }
 
