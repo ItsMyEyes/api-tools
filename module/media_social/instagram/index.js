@@ -13,7 +13,7 @@ const defaultHeaders = {
   
 const getHeaders = (headers) => {
     return Object.assign(headers, {
-        cookie: `sessionid=52085861546:wutvL8s1SYY6vB:4; ds_user_id=52085861546`
+        cookie: `sessionid=52085861546:trq97msg4EBdl7:28; ds_user_id=52085861546`
     })
 }
 
@@ -118,6 +118,7 @@ exports.scrapeUser = username => {
                 result: userFetch(user)
             })
         }).catch(err => {
+            console.log(err)
             resolve({
                 status: false,
                 message: "username Cant Find",
