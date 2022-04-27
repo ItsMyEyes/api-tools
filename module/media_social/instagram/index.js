@@ -13,7 +13,7 @@ const defaultHeaders = {
   
 const getHeaders = (headers) => {
     return Object.assign(headers, {
-        cookie: `sessionid=52085861546:XXOhMZwjJI3lVP:27; ds_user_id=52085861546`
+        cookie: `sessionid=52085861546:wutvL8s1SYY6vB:4; ds_user_id=52085861546`
     })
 }
 
@@ -64,6 +64,7 @@ exports.getStory = async (url, uid) => {
                 }
             });
         }).catch(err => {
+            resolve(err)
             resolve({ message: "Instagram / Story cant to get, like iam get him", status: false })
         })
     })
